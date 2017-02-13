@@ -1,0 +1,15 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "symfony/console": "^3.2",
+        "monolog/monolog": "^1.22",
+        "symfony/cache": "^3.2",
+        "swiftmailer/swiftmailer": "^5.4",
+        "symfony/yaml": "^3.2",
+        "symfony/dependency-injection": "^3.2",
+        "krakjoe/pthreads-polyfill": "^1.1"
+    },
+    "autoload": {
+        "psr-0": { "": "src/" }
+    }
+}

@@ -1,0 +1,158 @@
+{
+  "api_settings": {
+    "gpts-demo": {
+      "base_uri": "http://37.187.148.231:80/gptp/api/",
+      "options": {
+        "api_key": "ROIw7Hy0Ps8enuIA7ynvimDp3OF+NoGtGHQBXKRfnbM="
+      }
+    },
+    "jsonplaceholder": {
+      "base_uri": "http://jsonplaceholder.typicode.com/"
+    }
+  },
+  "test_cases": {
+    "find_minsk": {
+      "email": "admin@localhost",
+      "api": "gpts-demo",
+      "tests": [
+        "authorization",
+        "location_minsk"
+      ]
+    },
+    "authorization_check1": {
+      "email": "admin@localhost",
+      "api": "gpts-demo",
+      "tests": [
+        "authorization1"
+      ]
+    },
+    "authorization_check2": {
+      "email": "admin@localhost",
+      "api": "gpts-demo",
+      "tests": [
+        "authorization2"
+      ]
+    },
+    "get_first_post": {
+      "email": "admin@localhost",
+      "api": "jsonplaceholder",
+      "tests": [
+        "posts",
+        "post"
+      ]
+    }
+  },
+  "tests": {
+    "authorization": {
+      "method": "GET",
+      "uri": "authorization",
+      "options": {
+        "query": {
+          "apiKey": "<API_KEY>"
+        }
+      },
+      "response_tests": [
+        "authorization_token_exist"
+      ]
+    },
+    "authorization1": {
+      "method": "GET",
+      "uri": "authorization",
+      "options": {
+        "query": {
+          "apiKey": "ROIw7Hy0Ps8enuIA7ynvimDp3OF+NoGtGHQBXKRfnbM=1"
+        }
+      },
+      "response_tests": [
+        "authorization_token_exist"
+      ]
+    },
+    "authorization2": {
+      "method": "GET",
+      "uri": "authorization",
+      "options": {
+        "query": {
+          "apiKey": "<API_KEY>"
+        }
+      },
+      "response_tests": [
+        "authorization_token_exist"
+      ]
+    },
+    "location_minsk": {
+      "method": "GET",
+      "uri": "locations",
+      "options": {
+        "query": {
+          "pattern": "Minsk",
+          "limitCities": 1
+        },
+        "headers": {
+          "Token": "<TOKEN>"
+        }
+      },
+      "response_tests": [
+        "location_city_minsk"
+      ]
+    },
+    "posts": {
+      "method": "GET",
+      "uri": "posts",
+      "response_tests": [
+        "first_post_exist"
+      ]
+    },
+    "post": {
+      "method": "GET",
+      "uri": "posts/<POST_ID>",
+      "response_tests": [
+        "first_post_details_body_exist"
+      ]
+    }
+  },
+  "response_tests": {
+    "authorization_token_exist": {
+      "name": "token",
+      "index": [
+        "token"
+      ],
+      "check_methods": {
+        "exist": []
+      }
+    },
+    "location_city_minsk": {
+      "name": "city_id",
+      "index": [
+        "cities",
+        0,
+        "id"
+      ],
+      "check_methods": {
+        "exist": [],
+        "equal": [
+          3855
+        ]
+      }
+    },
+    "first_post_exist": {
+      "name": "post_id",
+      "index": [
+        0,
+        "id"
+      ],
+      "check_methods": {
+        "exist": [],
+        "equal": [1]
+      }
+    },
+    "first_post_details_body_exist": {
+      "name": "body",
+      "index": [
+        "body"
+      ],
+      "check_methods": {
+        "exist": []
+      }
+    }
+  }
+}

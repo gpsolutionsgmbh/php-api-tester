@@ -1,0 +1,150 @@
+{
+  "type": "object",
+  "title": "API tests config",
+  "properties": {
+    "api_settings": {
+      "type": "object",
+      "title": "API settings.",
+      "description": "API connection settings list.",
+      "properties": {
+        "api_name": {
+          "type": "object",
+          "title": "Api item.",
+          "properties": {
+            "base_uri": {
+              "type": "string",
+              "title": "Base uri.",
+              "description": "API base uri."
+            },
+            "options": {
+              "type": "object",
+              "title": "Options.",
+              "description": "API options list - {option_name: value,...} you can use it as uppercase placeholder <OPTION_NAME> in tests.test_name.uri and tests.test_name.options.",
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "test_cases": {
+      "type": "object",
+      "title": "Test cases settings.",
+      "description": "Test case settings list (they can run in separate threads when php extension pthreads will be installed)",
+      "properties": {
+        "test_case_name": {
+          "type": "object",
+          "title": "Test case item.",
+          "properties": {
+            "email": {
+              "type": "string",
+              "title": "Email.",
+              "description": "Email for test fail notifications."
+            },
+            "api": {
+              "type": "string",
+              "title": "Api name.",
+              "description": "api_settings.api_name link."
+            },
+            "tests": {
+              "type": "array",
+              "title": "Tests list.",
+              "description": "The list of executed sequentially tests.",
+              "items": {
+                "title": "Test name.",
+                "description": "tests.test_name link."
+              }
+            }
+          }
+        }
+      }
+    },
+    "tests": {
+      "type": "object",
+      "title": "Tests settings.",
+      "description": "Tests settings list.",
+      "properties": {
+        "test_name": {
+          "type": "object",
+          "title": "Test item.",
+          "properties": {
+            "method": {
+              "type": "string",
+              "title": "Request method.",
+              "description": "POST, GET, etc."
+            },
+            "uri": {
+              "type": "string",
+              "title": "Request uri.",
+              "description": "API method uri. It can contents <OPTION_NAME> or <RS_ATTR_NAME> placeholders from previous test responses"
+            },
+            "options": {
+              "type": "object",
+              "title": "Options.",
+              "description": "Options for Guzzle request {query:{...},headers:{...},...}.",
+              "properties": {}
+            },
+            "response_tests": {
+              "type": "array",
+              "title": "Response tests.",
+              "description": "Check list for response body instance attributes.",
+              "items": {
+                "title": "Response test name.",
+                "description": "response_tests.response_test_name"
+              }
+            }
+          }
+        }
+      }
+    },
+    "response_tests": {
+      "type": "object",
+      "title": "Response tests settings.",
+      "description": "Response test settings list.",
+      "properties": {
+        "response_test_name": {
+          "type": "object",
+          "title": "Response test item.",
+          "description": "Response test settings for find and check one attribute in response body.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Attribute name.",
+              "description": "It can be used in tests.test_name.uri or tests.test_name.options as uppercase placeholder <RS_ATTR_NAME>"
+            },
+            "index": {
+              "type": "array",
+              "title": "Attribute index.",
+              "description": "Attribute indexes - path to attribute in response body hash instance.",
+              "items": {
+                "title": "Index.",
+                "description": "It can be string or integer."
+              }
+            },
+            "check_methods": {
+              "type": "object",
+              "title": "List of response body attribute check methods.",
+              "description": "List of check methods.",
+              "properties": {
+                "exist": {
+                  "type": "array",
+                  "title": "Exist method.",
+                  "description": "Check - attribute exist.",
+                  "items": {}
+                },
+                "equal": {
+                  "type": "array",
+                  "title": "Equal method.",
+                  "description": "Check - attribute equal value .",
+                  "items": {
+                    "title": "Value.",
+                    "description": "Value for compare."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

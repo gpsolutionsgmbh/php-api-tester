@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+set_time_limit(0);
+
+// include the composer autoloader
+require __DIR__.'/../vendor/autoload.php';
+
+// import the Symfony Console Application
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+// ... register commands
+$runCommand = new AppBundle\Command\RunCommand();
+$application->add($runCommand);
+$application->setDefaultCommand($runCommand->getName(), true);
+
+$application->run();

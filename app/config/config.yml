@@ -1,0 +1,10 @@
+# app/config/config.yml
+mailer:
+    host:      'localhost'
+    port:       25
+    security:
+    username:
+    password:
+    from:      'admin@localhost'
+tests_config:  'api-tester.json'
+threads_limit: 30
